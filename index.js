@@ -17,23 +17,26 @@
  \*───────────────────────────────────────────────────────────────────────────*/
 'use strict';
 
+var lib = require('stylus');
 
 module.exports = function (options) {
 
-    options.ext = options.ext || 'less';
-    options.dumpLineNumbers = 'comments';
+    options.ext = options.ext || 'styl';
+    var stylusPlugins = [];
+    var plugins = options.plugins || [];
+    plugins.forEach(function (plugin) {
+        var pluginModule = require(plugin);
+        stylusPlugins.push(pluginModule());
+    });
+    return function styl(data, args, callback) {
 
-    return function (data, args, callback) {
-        var star = data.toString('utf8');
-        var paths = args.paths;
-        var name = args.context.name;
+        var config = {
+            filename: args.context.filePath,
+            paths: args.paths,
+            use: stylusPlugins
+        };
 
-        if (star === 'good') {
-            callback(null, 'star');
-        } else {
-            callback(new Error('Bad star file'));
-        }
-
+        lib.render(data.toString(), config, callback);
     };
 
 };
