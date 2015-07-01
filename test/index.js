@@ -22,18 +22,18 @@
 
 var test = require('tap').test,
   path = require('path'),
-  Star = require(path.resolve(__dirname, '..')),
-  star = Star({}),
+  Stylus = require(path.resolve(__dirname, '..')),
+  stylus = Stylus({plugins: ['nib']}),
   fs = require('fs');
 
-test('construx-less', function (t) {
+test('construx-stylus', function (t) {
 
-    t.test('processes a good star file', function (t) {
-        t.plan(1);
-        //get good star file
-        fs.readFile(path.resolve(__dirname, 'star/good.star'), function (err, data) {
-            star(data, {paths: '', context: {name: 'star.compiled'}}, function (err, compiled) {
-                t.equal('star', compiled);
+    t.test('processes a good styl file', function (t) {
+        t.plan(2);
+        fs.readFile(path.resolve(__dirname, 'css/good.styl'), function (err, data) {
+            stylus(data, {paths: '', context: {name: 'styl.compiled'}}, function (err, compiled) {
+                t.ok(compiled.indexOf('-webkit-border-radius: 5px;') !== -1);
+                t.ok(compiled.indexOf('-webkit-linear-gradient(top, #fff, #000);') !== -1);
                 t.end();
             });
 
@@ -41,12 +41,11 @@ test('construx-less', function (t) {
 
     });
 
-    t.test('processes a bad star file', function (t) {
+    t.test('processes a bad styl file', function (t) {
         t.plan(1);
-        //get bad star file
-        fs.readFile(path.resolve(__dirname, 'star/bad.star'), function (err, data) {
-            star(data, {paths: '', context: {name: 'star.compiled'}}, function (err, compiled) {
-                t.ok(err.name === 'Error');
+        fs.readFile(path.resolve(__dirname, 'css/bad.styl'), function (err, data) {
+            stylus(data, {paths: '', context: {name: 'styl.compiled'}}, function (err, compiled) {
+                t.ok(err.name === 'ParseError');
                 t.end();
             });
 
