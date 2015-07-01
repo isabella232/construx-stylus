@@ -29,10 +29,12 @@
     "url": "https://github.com/krakenjs/construx-stylus/issues"
   },
   "homepage": "https://github.com/krakenjs/construx-stylus#readme",
+  "dependencies": {
+    "stylus": "^0.51.1"
+  },
   "devDependencies": {
     "jshint": "~2.4.3",
     "nyc": "^2.3.0",
-    "stylus": "^0.51.1",
     "tap": "^1.2.1"
   }
 }

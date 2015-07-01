@@ -8,10 +8,6 @@ Lead Maintainer: [Matt Edelman](https://github.com/grawk)
 [construx](https://github.com/krakenjs/construx) plugin for JIT-compiling stylus resources during development of [express](http://expressjs.com/) applications.
 
 
-## Requirements
-
-This plugin requires your project to have `stylus@^v0.50.0`.
-
 ## Usage
 
 ### Install
