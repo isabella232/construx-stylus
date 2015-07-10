@@ -22,18 +22,15 @@ var lib = require('stylus');
 module.exports = function (options) {
 
     options.ext = options.ext || 'styl';
-    var stylusPlugins = [];
-    var plugins = options.plugins || [];
-    plugins.forEach(function (plugin) {
-        var pluginModule = require(plugin);
-        stylusPlugins.push(pluginModule());
+    var plugins = (options.plugins || []).map(function (plugin) {
+        return require(plugin)();
     });
     return function styl(data, args, callback) {
 
         var config = {
             filename: args.context.filePath,
             paths: args.paths,
-            use: stylusPlugins
+            use: plugins
         };
 
         lib.render(data.toString(), config, callback);
