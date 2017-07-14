@@ -19,6 +19,10 @@
     "less"
   ],
   "author": "stylus",
+  "contributors": [
+    "Jean-Charles Sisk <jeancharles@gasbuddy.com>",
+    "Kyle Katarnls <https://github.com/kylekatarnls>"
+  ],
   "license": [
     {
       "type": "Apache 2.0",
